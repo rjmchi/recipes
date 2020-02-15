@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Ingredient;
 use Illuminate\Http\Request;
+use App\Http\Resources\Ingredient as IngredientResource;
+
 
 class IngredientController extends Controller
 {
@@ -35,7 +37,7 @@ class IngredientController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return ($this->addOrUpdate($request));
     }
 
     /**
@@ -46,7 +48,7 @@ class IngredientController extends Controller
      */
     public function show(Ingredient $ingredient)
     {
-        //
+        return new RecipeResource($ingredient);
     }
 
     /**
@@ -69,7 +71,7 @@ class IngredientController extends Controller
      */
     public function update(Request $request, Ingredient $ingredient)
     {
-        //
+        return ($this->addOrUpdate($request, $ingredient));
     }
 
     /**
@@ -80,6 +82,18 @@ class IngredientController extends Controller
      */
     public function destroy(Ingredient $ingredient)
     {
-        //
+        $ingredient->delete();
+        return new IngredientResource($ingredient);
     }
+    private function addOrUpdate(Request $request, Recipe $ingredient=null) {
+        if (!$ingredient) {
+            $ingredient = new Ingredient;
+        }
+        $ingredient->name = $request->name;
+        $ingredient->amount = $request->amount;
+        $ingredient->unit = $request->unit;
+        $ingredient->recipe_id = $request->recipe_id;
+        $ingredient->save();  
+        return new IngredientResource($ingredient); 
+    }    
 }
