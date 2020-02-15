@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Recipe;
 use Illuminate\Http\Request;
+use App\Http\Resources\Recipe as RecipeResource;
 
 class RecipeController extends Controller
 {
@@ -14,7 +15,8 @@ class RecipeController extends Controller
      */
     public function index()
     {
-        //
+        $Recipes = Recipe::paginate(15);
+        return RecipeResource::collection($Recipes);
     }
 
     /**
@@ -35,7 +37,7 @@ class RecipeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return ($this->addOrUpdate($request));
     }
 
     /**
@@ -46,7 +48,7 @@ class RecipeController extends Controller
      */
     public function show(Recipe $recipe)
     {
-        //
+        return new RecipeResource($recipe);
     }
 
     /**
@@ -69,7 +71,7 @@ class RecipeController extends Controller
      */
     public function update(Request $request, Recipe $recipe)
     {
-        //
+        return ($this->addOrUpdate($request, $recipe));
     }
 
     /**
@@ -80,6 +82,21 @@ class RecipeController extends Controller
      */
     public function destroy(Recipe $recipe)
     {
-        //
+        $recipe->delete();
+        return new RecipeResource($recipe);
+    }
+
+    private function addOrUpdate(Request $request, Recipe $recipe=null) {
+        if (!$recipe) {
+            $recipe = new Recipe;
+        }
+        $recipe->name = $request->name;
+        $recipe->flour = $request->flour;
+        $recipe->water = $request->water;
+        $recipe->starter = $request->starter;
+        $recipe->salt = $request->salt;
+        $recipe->notes = $request->notes;
+        $recipe->save();  
+        return new RecipeResource($recipe); 
     }
 }
