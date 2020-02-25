@@ -16,7 +16,8 @@ class IngredientController extends Controller
      */
     public function index()
     {
-        //
+        $ingredients = Ingredient::where('recipe_id', $recipe_id)->get();
+        return IngredientResource::collection($ingredients);
     }
 
     /**
@@ -85,7 +86,7 @@ class IngredientController extends Controller
         $ingredient->delete();
         return new IngredientResource($ingredient);
     }
-    private function addOrUpdate(Request $request, Recipe $ingredient=null) {
+    private function addOrUpdate(Request $request, Ingredient $ingredient=null) {
         if (!$ingredient) {
             $ingredient = new Ingredient;
         }
