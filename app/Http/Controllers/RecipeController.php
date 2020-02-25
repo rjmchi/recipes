@@ -15,7 +15,7 @@ class RecipeController extends Controller
      */
     public function index()
     {
-        $Recipes = Recipe::paginate(15);
+        $Recipes = Recipe::with('ingredients')->orderBy('name', 'asc')->paginate(15);
         return RecipeResource::collection($Recipes);
     }
 
