@@ -10884,3 +10884,8 @@ a.text-dark:focus {
   }
 }
 
+body {
+  background-color: #d9dff0;
+  margin: 10px;
+}
+
