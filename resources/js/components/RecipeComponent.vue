@@ -49,6 +49,7 @@
             </div>
             <button type="submit" class="btn btn-primary">Save</button>
         </form>
+
         <div class="card card-body" v-for="(recipe, idx) in recipes" v-bind:key="idx">
 
             <h3>{{recipe.name}} &mdash; {{recipe.id}}</h3>
@@ -62,8 +63,8 @@
                 <p>{{ingredient.name}} {{ingredient.amount}} {{ingredient.unit}} <button class="btn btn-danger btn-sm" @click="removeIngredient(ingredient.id)">Delete</button></p>
             </div>             
             <p>Notes: {{recipe.notes}}</p> 
-			<p>Hydration: {{((recipe.starter/2) + (recipe.water*1)) / ((recipe.starter/2) + (recipe.flour*1))}}</p> 
-            <form class="newingredient" @submit.prevent="addIngredient(recipe.id)">
+			<p>Hydration: {{((recipe.starter/2) + (recipe.water*1)) / ((recipe.starter/2) + (recipe.flour*1))}}</p>
+             <form class="newingredient" @submit.prevent="addIngredient(recipe.id)">
                 <span>
                 <label for="name">Name:</label>
                 <input v-model="ingredient.name" type="text" name="name">
@@ -200,7 +201,6 @@
                         this.newRecipe.salt = '';
                         this.newRecipe.starter = '';
                         this.newRecipe.water = '';
-                        alert('Updated');
                         this.fetchRecipes();
                     })
                     .catch(err => console.log(err));                    
