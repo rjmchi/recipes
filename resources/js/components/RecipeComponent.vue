@@ -1,7 +1,7 @@
 <template>
     <div class="container">
         <h2>Recipes</h2>
-        <nav aria-label="Page navigation example">
+        <nav aria-label="Page navigation">
             <ul class="pagination">
                 <li v-bind:class="[{disabled:!pagination.prev_page_url}]" class="page-item"><a class="page-link" href="#" @click="fetchRecipes(pagination.prev_page_url)">Previous</a></li>
                 
@@ -207,6 +207,7 @@
                 }
             },
             editRecipe(recipe) {
+                window.scrollTo(0,0);
                 this.edit = true;
                 this.newRecipe.id = recipe.id;
                 this.newRecipe.name = recipe.name;
