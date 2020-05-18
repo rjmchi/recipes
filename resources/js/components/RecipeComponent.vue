@@ -52,7 +52,7 @@
 
         <div class="card card-body" v-for="(recipe, idx) in recipes" v-bind:key="idx">
 
-            <h3>{{recipe.name}} &mdash; {{recipe.id}}</h3>
+            <h3>{{recipe.name}}</h3>
             <adjustable-value name="Starter" v-bind:initValue='recipe.starter' v-bind:idx='idx' @update-value="updateValue"/>
             <adjustable-value name="Flour" v-bind:initValue='recipe.flour' v-bind:idx='idx' @update-value="updateValue"/>
             <adjustable-value name="Water" v-bind:initValue='recipe.water' v-bind:idx='idx' @update-value="updateValue"/>
