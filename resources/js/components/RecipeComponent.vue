@@ -62,7 +62,7 @@
             <div v-for="ingredient in recipe.ingredients" v-bind:key="ingredient.id">
                 <p>{{ingredient.name}} {{ingredient.amount}} {{ingredient.unit}} <button class="btn btn-danger btn-sm" @click="removeIngredient(ingredient.id)">Delete</button></p>
             </div>             
-            <p>Notes: {{recipe.notes}}</p> 
+            <p>Notes: {{nl2br(recipe.notes)}}</p> 
 			<p>Hydration: {{((recipe.starter/2) + (recipe.water*1)) / ((recipe.starter/2) + (recipe.flour*1))}}</p>
              <form class="newingredient" @submit.prevent="addIngredient(recipe.id)">
                 <span>
