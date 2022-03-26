@@ -8,10 +8,10 @@
 </template>
 <script>
 export default {
-    props: ['name', 'initValue', 'idx'],
+    props: ['name', 'value', 'idx'],
     data() {
         return {
-            value: this.initValue,
+            // value: this.initValue,
         }
     },
     methods: {
