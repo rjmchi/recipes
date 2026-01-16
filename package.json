@@ -24,6 +24,6 @@
         "vue-template-compiler": "^2.7.14"
     },
     "dependencies": {
-        "npm-check-updates": "^16.6.3"
+        "npm-check-updates": "^19.3.1"
     }
 }
